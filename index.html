@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fun With Maths — Maths tuition for classes 6, 7 &amp; 8</title>
+<meta name="description" content="Fun With Maths turns CBSE and ICSE maths for classes 6 to 8 into puzzles, patterns and real understanding — not memorised formulas. Book a free trial class.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23FFC93C'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='bold' text-anchor='middle' fill='%2323303B'%3E%CF%80%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ Tokens ============ */
+:root{
+  --paper:#FFFDF6;
+  --paper-card:#FFFFFF;
+  --grid:#CBE6F2;
+  --ink:#23303B;
+  --ink-soft:#54636F;
+  --sun:#FFC93C;
+  --sun-deep:#E9A81E;
+  --sun-pale:#FFE9A8;
+  --teal:#0E8C83;
+  --teal-pale:#E4F4F1;
+  --coral:#E8503F;
+  --board:#35574A;
+  --board-wood:#96683F;
+  --chalk:#F6F1E3;
+  --line:#E7DFCC;
+  --radius:14px;
+  --shadow-paper:0 2px 2px rgba(35,48,59,.05), 0 12px 28px -14px rgba(35,48,59,.25);
+  --shadow-lift:0 3px 3px rgba(35,48,59,.06), 0 22px 40px -16px rgba(35,48,59,.32);
+  --font-display:'Fredoka',ui-rounded,system-ui,sans-serif;
+  --font-body:'Nunito',system-ui,sans-serif;
+  --font-hand:'Caveat',cursive;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  font-size:1.0625rem;
+  line-height:1.65;
+  color:var(--ink);
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:26px 26px;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3{font-family:var(--font-display);line-height:1.12;margin:0 0 .5em;text-wrap:balance}
+h1{font-size:clamp(2.35rem,5.4vw,3.7rem);font-weight:700;letter-spacing:-.01em}
+h2{font-size:clamp(1.75rem,3.6vw,2.5rem);font-weight:600}
+h3{font-size:1.25rem;font-weight:600}
+p{margin:0 0 1em;text-wrap:pretty}
+a{color:var(--teal);text-underline-offset:3px}
+img,svg{max-width:100%}
+.container{max-width:1120px;margin:0 auto;padding:0 clamp(1.1rem,4vw,2.25rem)}
+section{padding:clamp(3.6rem,8vw,6rem) 0;position:relative}
+.skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--paper);padding:.7rem 1.1rem;border-radius:0 0 10px 0;z-index:200}
+.skip:focus{left:0}
+
+/* ============ Small parts ============ */
+.mark{
+  background-image:linear-gradient(102deg, rgba(255,201,60,0) 1.5%, rgba(255,201,60,.95) 4%, rgba(255,226,122,.7) 40%, rgba(255,201,60,.85) 96%);
+  background-repeat:no-repeat;
+  padding:0 .16em;
+  border-radius:3px;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
+}
+.squiggle{position:relative;white-space:nowrap}
+.squiggle::after{
+  content:"";position:absolute;left:0;right:0;bottom:-.18em;height:.32em;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'%3E%3Cpath d='M0 5 Q 12 1 25 5 T 50 5 T 75 5 T 100 5' fill='none' stroke='%23FFC93C' stroke-width='3.4' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size:100% 100%;background-repeat:no-repeat;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--font-display);font-weight:500;font-size:.95rem;
+  letter-spacing:.02em;color:var(--teal);
+  background:var(--teal-pale);border:1px solid rgba(14,140,131,.25);
+  padding:.4rem .95rem;border-radius:999px;margin-bottom:1.3rem;
+}
+.eyebrow::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--coral)}
+.hand{font-family:var(--font-hand);font-size:1.35rem;color:var(--coral);font-weight:600;line-height:1.25}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  font-family:var(--font-display);font-weight:600;font-size:1.02rem;
+  padding:.85rem 1.6rem;border-radius:12px;border:2px solid transparent;
+  cursor:pointer;text-decoration:none;min-height:48px;
+  transition:transform .16s ease, box-shadow .16s ease, background-color .16s ease;
+}
+.btn-primary{background:var(--coral);color:#fff;box-shadow:0 4px 0 #B23A2D}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 0 #B23A2D}
+.btn-primary:active{transform:translateY(2px);box-shadow:0 1px 0 #B23A2D}
+.btn-ghost{background:var(--paper-card);color:var(--ink);border-color:var(--ink);box-shadow:0 4px 0 rgba(35,48,59,.9)}
+.btn-ghost:hover{transform:translateY(-2px)}
+.btn-ghost:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(35,48,59,.9)}
+.btn:focus-visible,a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:3px solid var(--teal);outline-offset:2px;border-radius:6px;
+}
+
+/* ============ Nav ============ */
+.nav-wrap{position:sticky;top:0;z-index:100;background:rgba(255,253,246,.94);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border-bottom:1px solid rgba(35,48,59,.09)}
+.nav{display:flex;align-items:center;gap:1.5rem;padding:.7rem clamp(1.1rem,4vw,2.25rem);max-width:1120px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--ink);font-family:var(--font-display);font-weight:700;font-size:1.18rem;white-space:nowrap}
+.brand .pi{width:38px;height:38px;flex:none;display:grid;place-items:center;background:var(--sun);border-radius:50% 46% 52% 48%/48% 52% 46% 54%;font-family:Georgia,serif;font-size:1.35rem;font-weight:700;transform:rotate(-6deg);transition:transform .25s ease}
+.brand:hover .pi{transform:rotate(8deg) scale(1.06)}
+.nav-links{display:flex;gap:1.3rem;margin-left:auto;align-items:center}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-weight:700;font-size:.95rem;padding:.4rem 0;border-bottom:2.5px solid transparent}
+.nav-links a:hover{color:var(--ink);border-bottom-color:var(--sun)}
+.nav-cta{margin-left:.4rem;padding:.55rem 1.1rem;min-height:0;font-size:.95rem;box-shadow:0 3px 0 #B23A2D}
+#navCtaMobile{display:none;margin-left:auto}
+.progress-ruler{height:9px;position:relative;overflow:hidden;background:rgba(35,48,59,.06)}
+.progress-ruler .fill{height:100%;width:0;background:linear-gradient(90deg,var(--sun),var(--sun-deep));transition:width .1s linear}
+.progress-ruler::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(90deg, rgba(35,48,59,.28) 0 1px, transparent 1px 13px);background-size:100% 5px;background-position:bottom;background-repeat:no-repeat}
+
+/* ============ Hero ============ */
+.hero{padding-top:clamp(2.6rem,6vw,4.5rem);overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+.hero p.lead{font-size:clamp(1.08rem,1.6vw,1.22rem);color:var(--ink-soft);max-width:34rem}
+.hero-ctas{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:1.7rem}
+.chips{display:flex;gap:.55rem;flex-wrap:wrap;margin-top:2rem}
+.chip{font-family:var(--font-display);font-weight:500;font-size:.9rem;background:var(--paper-card);border:1.5px dashed rgba(35,48,59,.35);padding:.35rem .85rem;border-radius:8px;transform:rotate(-.5deg)}
+.chip:nth-child(2n){transform:rotate(.6deg)}
+.chip.solid{background:var(--teal-pale);border-style:solid;border-color:rgba(14,140,131,.4);color:var(--teal)}
+
+/* notebook card */
+.notebook{
+  position:relative;background:var(--paper-card);border-radius:6px 14px 14px 6px;
+  border:1px solid var(--line);box-shadow:var(--shadow-lift);
+  transform:rotate(-1.4deg);padding:2.1rem 2rem 1.9rem 3.4rem;
+  background-image:repeating-linear-gradient(180deg, transparent 0 31px, #DCEAF3 31px 32px);
+  background-position:0 1.2rem;
+}
+.notebook::before{content:"";position:absolute;left:2.3rem;top:0;bottom:0;width:2px;background:rgba(232,80,63,.45)}
+.notebook .tape{position:absolute;top:-14px;left:50%;width:110px;height:30px;background:rgba(255,201,60,.55);border-left:1px dashed rgba(35,48,59,.2);border-right:1px dashed rgba(35,48,59,.2);transform:translateX(-50%) rotate(-2.5deg)}
+.notebook h3{font-size:1.15rem;margin-bottom:.65rem}
+.notebook .q{font-size:1.08rem;margin-bottom:1rem}
+.notebook .hand-note{position:absolute;right:1.2rem;bottom:.5rem;transform:rotate(-4deg);font-size:1.3rem}
+.answer-box{border:2px dashed rgba(14,140,131,.5);background:var(--teal-pale);border-radius:10px;padding:.85rem 1rem;margin-top:.4rem}
+.answer-box p{margin:0;font-size:.98rem}
+.reveal-answer{background:none;border:none;font-family:var(--font-hand);font-size:1.3rem;font-weight:700;color:var(--teal);cursor:pointer;padding:.3rem .2rem;min-height:44px}
+.reveal-answer:hover{text-decoration:underline}
+
+/* doodles */
+.doodles{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:-1}
+.doodle{position:absolute;font-family:var(--font-display);font-weight:600;color:rgba(14,140,131,.24);animation:drift 15s ease-in-out infinite alternate;user-select:none}
+.doodle:nth-child(2n){color:rgba(232,80,63,.2);animation-duration:19s}
+.doodle:nth-child(3n){color:rgba(233,168,30,.32);animation-duration:13s}
+@keyframes drift{from{transform:translateY(0) rotate(-4deg)}to{transform:translateY(-18px) rotate(7deg)}}
+
+/* ============ Marquee ============ */
+.marquee{background:var(--sun);border-top:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink);padding:.65rem 0;overflow:hidden;transform:rotate(-.5deg) scale(1.02)}
+.marquee-track{display:flex;width:max-content;animation:scroll 38s linear infinite;font-family:var(--font-display);font-weight:500;font-size:1.02rem;color:var(--ink)}
+.marquee-track span{padding:0 1.4rem;white-space:nowrap}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ============ Teach cards ============ */
+.section-head{max-width:38rem;margin-bottom:2.6rem}
+.section-head p{color:var(--ink-soft)}
+.class-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem}
+.paper-card{
+  position:relative;background:var(--paper-card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow-paper);padding:2.4rem 1.6rem 1.7rem;transition:transform .22s ease, box-shadow .22s ease;
+}
+.paper-card:hover{box-shadow:var(--shadow-lift)}
+.class-card{transform:rotate(-1.2deg)}
+.class-card:nth-child(2){transform:rotate(.8deg)}
+.class-card:nth-child(3){transform:rotate(-.5deg)}
+.class-card:hover{transform:rotate(0) translateY(-6px)}
+.class-card::before{
+  content:"";position:absolute;top:-13px;left:50%;transform:translateX(-50%) rotate(-3deg);
+  width:96px;height:26px;background:rgba(255,201,60,.5);
+  border-left:1px dashed rgba(35,48,59,.18);border-right:1px dashed rgba(35,48,59,.18);
+}
+.class-badge{font-family:var(--font-display);font-weight:700;font-size:2rem;color:var(--paper);background:var(--teal);display:inline-block;padding:.1rem .8rem;border-radius:10px;transform:rotate(-2deg);margin-bottom:.9rem}
+.class-card:nth-child(2) .class-badge{background:var(--coral)}
+.class-card:nth-child(3) .class-badge{background:var(--sun-deep)}
+.topic-list{list-style:none;margin:0 0 1rem;padding:0}
+.topic-list li{padding:.42rem 0 .42rem 1.75rem;position:relative;border-bottom:1px dotted rgba(35,48,59,.15);font-size:.99rem}
+.topic-list li:last-child{border-bottom:none}
+.topic-list li::before{content:"✓";position:absolute;left:0;color:var(--coral);font-weight:800}
+.margin-note{font-family:var(--font-hand);font-size:1.25rem;color:var(--coral);transform:rotate(-2deg);display:inline-block;margin-top:.3rem}
+
+/* ============ Why fun list ============ */
+.why{background:var(--teal-pale);border-top:1px solid rgba(14,140,131,.16);border-bottom:1px solid rgba(14,140,131,.16)}
+.why-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
+.why-list{list-style:none;margin:0;padding:0;counter-reset:why}
+.why-list li{counter-increment:why;position:relative;padding:0 0 1.9rem 4.1rem}
+.why-list li:last-child{padding-bottom:0}
+.why-list li::before{
+  content:counter(why);position:absolute;left:0;top:-.35rem;
+  font-family:var(--font-hand);font-weight:700;font-size:3rem;line-height:1;color:var(--coral);transform:rotate(-6deg);
+}
+.why-list h3{margin-bottom:.25rem;font-size:1.18rem}
+.why-list p{margin:0;color:var(--ink-soft)}
+.why-list li::after{content:"";position:absolute;left:1.35rem;top:2.6rem;bottom:.5rem;width:2px;background:repeating-linear-gradient(180deg,rgba(232,80,63,.35) 0 5px,transparent 5px 10px)}
+.why-list li:last-child::after{display:none}
+.why-quote{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-paper);padding:2rem;transform:rotate(.8deg)}
+.why-quote .hand{font-size:1.65rem;color:var(--ink);margin:0 0 .4rem}
+.why-quote cite{font-style:normal;font-family:var(--font-display);font-size:.95rem;color:var(--ink-soft)}
+
+/* ============ Board / quiz ============ */
+.board-section{background:linear-gradient(180deg,#EFE6D3,#E7DCC4)}
+.board{
+  background:var(--board);
+  border:13px solid var(--board-wood);
+  border-radius:8px;
+  box-shadow:inset 0 0 90px rgba(0,0,0,.3), 0 26px 50px -22px rgba(35,48,59,.55);
+  padding:clamp(1.8rem,4.5vw,3.2rem);
+  color:var(--chalk);position:relative;overflow:hidden;
+}
+.board::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(120% 70% at 20% 0%, rgba(255,255,255,.09), transparent 60%),
+  radial-gradient(90% 60% at 95% 100%, rgba(255,255,255,.06), transparent 55%);pointer-events:none}
+.board h2{color:var(--chalk);text-shadow:0 0 14px rgba(246,241,227,.25)}
+.board .sub{color:rgba(246,241,227,.82);max-width:36rem}
+.quiz{margin-top:2rem;max-width:44rem}
+.quiz-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.quiz-meta{font-family:var(--font-display);font-weight:500;font-size:1rem;color:rgba(246,241,227,.85)}
+.timer{font-family:var(--font-display);font-weight:600;font-size:1.15rem;background:rgba(0,0,0,.28);border:2px solid rgba(246,241,227,.4);padding:.3rem .9rem;border-radius:999px;min-width:96px;text-align:center}
+.timer.low{color:#FFD9A0;border-color:#FFD9A0;animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.55}}
+.quiz-q{font-family:var(--font-display);font-weight:600;font-size:clamp(1.25rem,2.4vw,1.6rem);margin-bottom:1.2rem;text-shadow:0 0 12px rgba(246,241,227,.2)}
+.quiz-opts{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem}
+.quiz-opts button{
+  font-family:var(--font-display);font-weight:500;font-size:1.08rem;color:var(--chalk);
+  background:rgba(255,255,255,.06);border:2px solid rgba(246,241,227,.45);border-radius:12px;
+  padding:.85rem 1rem;cursor:pointer;min-height:56px;transition:background-color .15s ease, transform .15s ease, border-color .15s ease;
+}
+.quiz-opts button:hover:not(:disabled){background:rgba(255,255,255,.16);transform:translateY(-2px)}
+.quiz-opts button:disabled{cursor:default}
+.quiz-opts button.correct{background:rgba(120,214,160,.28);border-color:#8FE3B4;color:#EAFBEF}
+.quiz-opts button.wrong{background:rgba(232,80,63,.3);border-color:#F0A79C;color:#FDEAE7}
+.quiz-opts button.dim{opacity:.45}
+.quiz-feedback{margin-top:1.2rem;min-height:3.4rem;font-size:1.04rem;color:rgba(246,241,227,.95);display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.quiz-feedback .verdict{font-family:var(--font-hand);font-size:1.6rem;font-weight:700;color:#FFD970;flex:none}
+.quiz-feedback .verdict.miss{color:#F5B3AB}
+.quiz-nav{margin-top:.4rem}
+.btn-chalk{background:var(--sun);color:var(--ink);border:none;box-shadow:0 4px 0 var(--sun-deep)}
+.btn-chalk:hover{transform:translateY(-2px)}
+.quiz-result{display:none;text-align:left}
+.quiz-result .score{font-family:var(--font-hand);font-size:4.2rem;line-height:1;color:var(--sun);margin:.2rem 0 .6rem;font-weight:700}
+.quiz-result p{max-width:34rem;color:rgba(246,241,227,.9)}
+.quiz-result .row{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem}
+.btn-outline-chalk{background:transparent;color:var(--chalk);border:2px solid rgba(246,241,227,.5);box-shadow:none}
+.btn-outline-chalk:hover{background:rgba(255,255,255,.1)}
+.board-note{margin-top:1.3rem;font-family:var(--font-hand);font-size:1.3rem;color:rgba(246,241,227,.75);transform:rotate(-1deg)}
+
+/* ============ Plans ============ */
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;align-items:stretch}
+.plan{display:flex;flex-direction:column}
+.plan .tag{font-family:var(--font-display);font-weight:600;font-size:.85rem;letter-spacing:.05em;text-transform:uppercase;color:var(--teal);margin-bottom:.4rem}
+.plan.featured{border:2.5px solid var(--coral);transform:rotate(.7deg)}
+.plan.featured .tag{color:var(--coral)}
+.plan ul{list-style:none;margin:0 0 1.4rem;padding:0;flex:1}
+.plan ul li{padding:.4rem 0 .4rem 1.6rem;position:relative;font-size:.98rem;color:var(--ink-soft)}
+.plan ul li::before{content:"→";position:absolute;left:0;color:var(--sun-deep);font-weight:800}
+.fee{border-top:2px dashed rgba(35,48,59,.25);padding-top:1rem;display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+.fee .label{font-family:var(--font-display);font-weight:500;color:var(--ink-soft);font-size:.95rem}
+.fee .blank{display:inline-block;min-width:7.5rem;border-bottom:3px dotted var(--coral);height:1.6rem}
+.fee .per{font-size:.9rem;color:var(--ink-soft)}
+.plans-note{text-align:center;margin-top:2rem;font-family:var(--font-hand);font-size:1.5rem;color:var(--coral);transform:rotate(-1deg)}
+
+/* ============ Tutor ============ */
+.tutor{background:var(--teal-pale);border-top:1px solid rgba(14,140,131,.16);border-bottom:1px solid rgba(14,140,131,.16)}
+.tutor-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+.portrait{
+  aspect-ratio:1;display:grid;place-items:center;background:var(--paper-card);
+  border:1px solid var(--line);border-radius:50% 46% 52% 48%/48% 52% 46% 54%;
+  box-shadow:var(--shadow-paper);transform:rotate(-2deg);
+}
+.portrait .initial{font-family:var(--font-display);font-weight:700;font-size:clamp(5rem,10vw,7rem);color:var(--teal)}
+.tutor blockquote{margin:1.4rem 0 0;padding-left:1.2rem;border-left:4px solid var(--sun);font-size:1.12rem;color:var(--ink-soft)}
+.tutor .sig{font-family:var(--font-hand);font-size:2rem;color:var(--ink);margin-top:1rem;transform:rotate(-2deg);display:inline-block}
+
+/* ============ FAQ ============ */
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem 1.6rem}
+details.faq{background:var(--paper-card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-paper);overflow:hidden}
+details.faq summary{
+  list-style:none;cursor:pointer;padding:1.05rem 3rem 1.05rem 1.2rem;position:relative;
+  font-family:var(--font-display);font-weight:600;font-size:1.02rem;min-height:48px;display:flex;align-items:center;
+}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{
+  content:"+";position:absolute;right:1.1rem;top:50%;transform:translateY(-50%);
+  font-family:var(--font-display);font-size:1.6rem;font-weight:500;color:var(--coral);transition:transform .2s ease;line-height:1;
+}
+details.faq[open] summary::after{transform:translateY(-50%) rotate(135deg)}
+details.faq .ans{padding:0 1.2rem 1.15rem;color:var(--ink-soft);font-size:.99rem;margin:0}
+
+/* ============ Contact ============ */
+.contact-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(2rem,5vw,4rem);align-items:start}
+.contact-lines{list-style:none;margin:1.6rem 0 0;padding:0}
+.contact-lines li{display:flex;gap:.8rem;align-items:baseline;padding:.5rem 0;font-size:1.05rem}
+.contact-lines .k{font-family:var(--font-display);font-weight:600;color:var(--ink-soft);min-width:6.2rem;font-size:.92rem;letter-spacing:.03em;text-transform:uppercase}
+.contact-lines a{font-weight:700}
+.contact-form{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-lift);padding:2rem;transform:rotate(-.5deg)}
+.field{margin-bottom:1.25rem}
+.field label{display:block;font-family:var(--font-display);font-weight:500;font-size:.93rem;margin-bottom:.25rem;color:var(--ink-soft)}
+.field input,.field select,.field textarea{
+  width:100%;font-family:var(--font-body);font-size:1.02rem;color:var(--ink);
+  background:transparent;border:none;border-bottom:2.5px dotted rgba(35,48,59,.35);
+  padding:.45rem .2rem;min-height:44px;border-radius:0;
+}
+.field textarea{min-height:88px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-bottom:2.5px solid var(--teal);background:rgba(228,244,241,.4)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.form-note{font-size:.9rem;color:var(--ink-soft);margin:.9rem 0 0}
+.form-confirm{display:none;margin-top:1rem;background:var(--teal-pale);border:1.5px solid rgba(14,140,131,.4);border-radius:10px;padding:.85rem 1rem;font-size:.97rem}
+
+/* ============ Footer ============ */
+footer{background:var(--ink);color:rgba(255,253,246,.85);padding:3.2rem 0 2rem}
+.foot-grid{display:grid;grid-template-columns:1.2fr 1fr 1.2fr;gap:2.4rem;align-items:start}
+footer .brand{color:var(--paper);margin-bottom:.6rem}
+footer p{font-size:.95rem;color:rgba(255,253,246,.65)}
+.foot-links{list-style:none;margin:0;padding:0}
+.foot-links li{padding:.28rem 0}
+.foot-links a{color:rgba(255,253,246,.8);text-decoration:none;font-weight:600;font-size:.96rem}
+.foot-links a:hover{color:var(--sun)}
+.joke-box{background:rgba(255,255,255,.06);border:1.5px dashed rgba(255,201,60,.5);border-radius:12px;padding:1.1rem 1.2rem}
+.joke-box .kicker{font-family:var(--font-display);font-weight:500;font-size:.85rem;letter-spacing:.05em;text-transform:uppercase;color:var(--sun);margin-bottom:.4rem}
+.joke-box .joke{min-height:3.4rem;margin:0 0 .6rem;font-size:1rem;color:rgba(255,253,246,.92)}
+.joke-btn{background:none;border:none;font-family:var(--font-hand);font-size:1.25rem;font-weight:700;color:var(--sun);cursor:pointer;padding:.35rem .1rem;min-height:44px}
+.joke-btn:hover{text-decoration:underline}
+.foot-base{border-top:1px solid rgba(255,253,246,.14);margin-top:2.4rem;padding-top:1.4rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.88rem;color:rgba(255,253,246,.55)}
+
+/* ============ Reveal ============ */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ Responsive ============ */
+@media (max-width:960px){
+  .hero-grid,.why-grid,.tutor-grid,.contact-grid{grid-template-columns:1fr}
+  .class-grid,.plans-grid,.faq-grid{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  #navCtaMobile{display:inline-flex}
+  .portrait{max-width:280px;margin:0 auto}
+}
+@media (max-width:640px){
+  .class-grid,.plans-grid,.faq-grid,.quiz-opts,.field-row,.foot-grid{grid-template-columns:1fr}
+  .notebook{transform:rotate(-.8deg);padding-left:2.8rem}
+  .hero-ctas .btn{width:100%}
+  .board{border-width:8px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .doodle,.marquee-track{animation:none}
+  .reveal{opacity:1;transform:none;transition:none}
+  .btn,.paper-card,.quiz-opts button{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="nav-wrap">
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="#top"><span class="pi" aria-hidden="true">π</span> Fun With Maths</a>
+    <div class="nav-links">
+      <a href="#teach">What we teach</a>
+      <a href="#why">Why it's fun</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#plans">Plans</a>
+      <a href="#tutor">Tutor</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-primary nav-cta" href="#contact">Book a free trial</a>
+    </div>
+    <a class="btn btn-primary nav-cta" href="#contact" style="margin-left:auto" id="navCtaMobile">Free trial</a>
+  </nav>
+  <div class="progress-ruler" aria-hidden="true"><div class="fill" id="progressFill"></div></div>
+</div>
+
+<main id="main">
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="doodles" aria-hidden="true">
+    <span class="doodle" style="top:8%;left:4%;font-size:2.6rem">π</span>
+    <span class="doodle" style="top:22%;left:92%;font-size:2rem">÷</span>
+    <span class="doodle" style="top:64%;left:3%;font-size:2.2rem">∠</span>
+    <span class="doodle" style="top:84%;left:88%;font-size:2.8rem">∞</span>
+    <span class="doodle" style="top:45%;left:47%;font-size:1.5rem">%</span>
+    <span class="doodle" style="top:12%;left:60%;font-size:1.6rem">×</span>
+    <span class="doodle" style="top:90%;left:30%;font-size:1.8rem">△</span>
+    <span class="doodle" style="top:35%;left:14%;font-size:1.4rem">√</span>
+  </div>
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Live tuition for classes 6, 7 &amp; 8</span>
+      <h1>Maths class kids <span class="squiggle">actually look</span> forward to.</h1>
+      <p class="lead">Fun With Maths turns CBSE and ICSE maths into puzzles, patterns and real understanding. Your child stops memorising formulas and starts deriving them — which is the only way they ever stick.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#contact">Book a free trial class</a>
+        <a class="btn btn-ghost" href="#quiz">Try the 60-second quiz</a>
+      </div>
+      <div class="chips">
+        <span class="chip solid">Class 6</span>
+        <span class="chip solid">Class 7</span>
+        <span class="chip solid">Class 8</span>
+        <span class="chip">CBSE &amp; ICSE</span>
+        <span class="chip">Batches of 5</span>
+        <span class="chip">Online &amp; in person</span>
+      </div>
+    </div>
+    <div class="notebook reveal">
+      <span class="tape" aria-hidden="true"></span>
+      <h3>Brain-teaser of the day</h3>
+      <p class="q">A bat and a ball cost ₹110 in total. The bat costs ₹100 more than the ball.<br>How much does the ball cost?</p>
+      <button class="reveal-answer" id="teaserBtn" aria-expanded="false" aria-controls="teaserAns">Show answer ▸</button>
+      <div class="answer-box" id="teaserAns" hidden>
+        <p><strong>₹5.</strong> Not ₹10. If the ball cost ₹10, the bat would be ₹110 and the total ₹120. The ball is ₹5 and the bat is ₹105 — which is exactly ₹100 more.</p>
+      </div>
+      <span class="hand hand-note" aria-hidden="true">most adults get this wrong!</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="marqueeTrack">
+    <span>Integers</span><span>✦</span><span>Fractions</span><span>✦</span><span>Ratio &amp; Proportion</span><span>✦</span><span>Lines &amp; Angles</span><span>✦</span><span>Simple Equations</span><span>✦</span><span>Mensuration</span><span>✦</span><span>Exponents &amp; Powers</span><span>✦</span><span>Factorisation</span><span>✦</span><span>Data Handling</span><span>✦</span><span>Rational Numbers</span><span>✦</span><span>Square Roots</span><span>✦</span><span>Geometry</span><span>✦</span>
+  </div>
+</div>
+
+<!-- ============ WHAT WE TEACH ============ -->
+<section id="teach">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>What we teach, <span class="mark">class by class</span></h2>
+      <p>Aligned to the NCERT syllabus for CBSE and ICSE. If your school follows a different textbook, we adapt the plan around it.</p>
+    </div>
+    <div class="class-grid">
+      <article class="paper-card class-card reveal">
+        <span class="class-badge">6</span>
+        <h3>Class 6 — the foundations</h3>
+        <ul class="topic-list">
+          <li>Natural numbers, whole numbers &amp; integers</li>
+          <li>Fractions and decimals</li>
+          <li>Ratio and proportion</li>
+          <li>Basic geometry and mensuration</li>
+          <li>Data handling and bar graphs</li>
+        </ul>
+        <span class="margin-note">← fractions decide everything later</span>
+      </article>
+      <article class="paper-card class-card reveal" style="--d:.1s">
+        <span class="class-badge">7</span>
+        <h3>Class 7 — where confidence forms</h3>
+        <ul class="topic-list">
+          <li>Rational numbers</li>
+          <li>Lines, angles and triangles</li>
+          <li>Simple equations</li>
+          <li>Perimeter and area</li>
+          <li>Comparing quantities &amp; percentages</li>
+        </ul>
+        <span class="margin-note">← exam favourite: triangles</span>
+      </article>
+      <article class="paper-card class-card reveal" style="--d:.2s">
+        <span class="class-badge">8</span>
+        <h3>Class 8 — pre-board armour</h3>
+        <ul class="topic-list">
+          <li>Linear equations in one variable</li>
+          <li>Exponents and powers, square roots</li>
+          <li>Mensuration (2D and 3D)</li>
+          <li>Factorisation and algebraic identities</li>
+          <li>Graphs and data handling</li>
+        </ul>
+        <span class="margin-note">← boards start counting now</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY IT'S FUN ============ -->
+<section class="why" id="why">
+  <div class="container why-grid">
+    <div class="reveal">
+      <h2>Why kids <span class="squiggle">actually enjoy</span> it</h2>
+      <p style="color:var(--ink-soft)">Four rules we never break. They are the whole method, really.</p>
+      <div class="why-quote">
+        <p class="hand">"He used to hide his maths notebook. Now he shows me the puzzle he solved."</p>
+        <cite>— the kind of line we work for</cite>
+      </div>
+    </div>
+    <ol class="why-list reveal" style="--d:.1s">
+      <li>
+        <h3>Formulas are derived, never dictated</h3>
+        <p>Your child works out why the formula exists, once. After that, recalling it is easy — and so is surviving a question that twists it.</p>
+      </li>
+      <li>
+        <h3>Every chapter opens with a puzzle</h3>
+        <p>Before the definition, before the notation, there is a puzzle that makes the idea obvious. The textbook language then feels like a description of something they already know.</p>
+      </li>
+      <li>
+        <h3>Mistakes are the syllabus</h3>
+        <p>A wrong answer earns a two-minute mini-lesson, not a red face. We keep a running list of brilliant mistakes and revisit them before exams.</p>
+      </li>
+      <li>
+        <h3>Parents get receipts, every month</h3>
+        <p>A short report naming exactly what your child has mastered and what still needs work — with sample questions, not just grades out of twenty.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="board-section" id="quiz">
+  <div class="container">
+    <div class="board reveal">
+      <h2>Beat the 60-second challenge</h2>
+      <p class="sub">Five questions from the class 6–8 syllabus. No calculator, no pressure. This is exactly how our classes start.</p>
+      <div class="quiz" id="quizApp">
+        <div id="quizPlay">
+          <div class="quiz-top">
+            <span class="quiz-meta" id="quizProgress">Question 1 of 5</span>
+            <span class="timer" id="quizTimer" aria-live="off">1:00</span>
+          </div>
+          <p class="quiz-q" id="quizQ"></p>
+          <div class="quiz-opts" id="quizOpts" role="group" aria-label="Answer options"></div>
+          <p class="quiz-feedback" id="quizFeedback" aria-live="polite"></p>
+          <div class="quiz-nav"><button class="btn btn-chalk" id="quizNext" hidden>Next question →</button></div>
+        </div>
+        <div class="quiz-result" id="quizResult" role="status">
+          <p class="quiz-meta" id="resultKicker">Final score</p>
+          <p class="score" id="resultScore">0 / 5</p>
+          <p id="resultMsg"></p>
+          <div class="row">
+            <a class="btn btn-chalk" href="#contact">Book the free trial</a>
+            <button class="btn btn-outline-chalk" id="quizRetry">Play again</button>
+          </div>
+        </div>
+      </div>
+      <p class="board-note" aria-hidden="true">psst — try it with your child. Go on.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLANS ============ -->
+<section id="plans">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Pick a <span class="mark">plan</span></h2>
+      <p>Every plan starts with a free trial class, so your child can feel the difference before you pay anything.</p>
+    </div>
+    <div class="plans-grid">
+      <article class="paper-card plan reveal">
+        <span class="tag">Small group</span>
+        <h3>Batch class</h3>
+        <ul>
+          <li>Maximum 5 students per batch</li>
+          <li>Two live classes a week</li>
+          <li>Weekly homework check</li>
+          <li>Monthly progress report</li>
+        </ul>
+        <div class="fee"><span class="label">Fee</span><span class="blank" aria-label="fee to be confirmed"></span><span class="per">per month</span></div>
+      </article>
+      <article class="paper-card plan featured reveal" style="--d:.1s">
+        <span class="tag">Most chosen</span>
+        <h3>One-to-one</h3>
+        <ul>
+          <li>Entirely your child's pace</li>
+          <li>Timings that suit your schedule</li>
+          <li>Doubt support between classes</li>
+          <li>Chapter-by-chapter gap fixing</li>
+        </ul>
+        <div class="fee"><span class="label">Fee</span><span class="blank" aria-label="fee to be confirmed"></span><span class="per">per month</span></div>
+      </article>
+      <article class="paper-card plan reveal" style="--d:.2s">
+        <span class="tag">Exam season</span>
+        <h3>Exam sprint</h3>
+        <ul>
+          <li>Six weeks before the exams</li>
+          <li>Chapter-wise test series</li>
+          <li>Revision plan and formula drills</li>
+          <li>Full-length practice papers</li>
+        </ul>
+        <div class="fee"><span class="label">Fee</span><span class="blank" aria-label="fee to be confirmed"></span><span class="per">per course</span></div>
+      </article>
+    </div>
+    <p class="plans-note">The first class is always free — always.</p>
+  </div>
+</section>
+
+<!-- ============ TUTOR ============ -->
+<section class="tutor" id="tutor">
+  <div class="container tutor-grid">
+    <div class="portrait reveal" aria-hidden="true"><span class="initial">G</span></div>
+    <div class="reveal" style="--d:.1s">
+      <h2>Meet your <span class="squiggle">tutor</span></h2>
+      <p style="color:var(--ink-soft)">Hi, I'm Gayathri. I hold a Master's in Medical Microbiology and an MBA in Finance and Business Analytics — both careers built on a foundation of maths, which is exactly why I care how it is taught.</p>
+      <p style="color:var(--ink-soft)">Over and over I have met bright students who were told they are "not maths people", when the truth is that they were taught to memorise instead of to understand. Fun With Maths exists to fix that, one class at a time.</p>
+      <blockquote>Your child is not slow. The method was lazy.</blockquote>
+      <span class="sig">— Gayathri, Fun With Maths</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Questions <span class="mark">parents ask</span></h2>
+    </div>
+    <div class="faq-grid">
+      <details class="faq reveal">
+        <summary>Are the classes online or in person?</summary>
+        <p class="ans">Both. Online classes run over video with a shared whiteboard, and in-person options are available. Tell us your preference while booking the trial.</p>
+      </details>
+      <details class="faq reveal" style="--d:.05s">
+        <summary>How big are the batches?</summary>
+        <p class="ans">Batches are capped at five students, so every child attempts every question in every class — nobody hides at the back.</p>
+      </details>
+      <details class="faq reveal" style="--d:.1s">
+        <summary>Which syllabus do you follow?</summary>
+        <p class="ans">CBSE and ICSE, aligned to NCERT for classes 6, 7 and 8. If your school uses a different textbook, we build the plan around that instead.</p>
+      </details>
+      <details class="faq reveal" style="--d:.15s">
+        <summary>What if my child is already far behind?</summary>
+        <p class="ans">Most students start behind. The first two classes are a diagnosis: we locate the exact gaps, list them for you, and fill them in the right order.</p>
+      </details>
+      <details class="faq reveal" style="--d:.2s">
+        <summary>How will I know it is working?</summary>
+        <p class="ans">A short monthly report showing what has been mastered and what needs work, plus a call after the first month to talk it through.</p>
+      </details>
+      <details class="faq reveal" style="--d:.25s">
+        <summary>Is there any long-term commitment?</summary>
+        <p class="ans">None. Classes are billed monthly, and you can pause or stop with a week's notice. No admission fees, no contracts.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="container contact-grid">
+    <div class="reveal">
+      <h2>Book the <span class="squiggle">free trial</span></h2>
+      <p style="color:var(--ink-soft)">One class, no payment details, no obligation. We will call you within one working day to fix a slot.</p>
+      <ul class="contact-lines">
+        <li><span class="k">WhatsApp</span> <a href="https://wa.me/919876543210">+91 98765 43210</a></li>
+        <li><span class="k">Email</span> <a href="mailto:hello@funwithmaths.in">hello@funwithmaths.in</a></li>
+        <li><span class="k">Timings</span> Mon–Sat, 4 pm to 8 pm</li>
+      </ul>
+      <p class="hand" style="margin-top:1.4rem;transform:rotate(-1.5deg);display:inline-block">bring a notebook. and a snack.</p>
+    </div>
+    <form class="contact-form" id="trialForm" novalidate>
+      <div class="field-row">
+        <div class="field">
+          <label for="fName">Parent's name</label>
+          <input id="fName" name="name" type="text" required autocomplete="name" placeholder="e.g. Lakshmi">
+        </div>
+        <div class="field">
+          <label for="fPhone">Phone</label>
+          <input id="fPhone" name="phone" type="tel" required autocomplete="tel" placeholder="10-digit number">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="fEmail">Email</label>
+          <input id="fEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label for="fClass">Class</label>
+          <select id="fClass" name="class">
+            <option>Class 6</option>
+            <option>Class 7</option>
+            <option>Class 8</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="fMsg">Anything we should know? (optional)</label>
+        <textarea id="fMsg" name="message" placeholder="School and board, preferred timings, where the child currently struggles…"></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit" style="width:100%">Request the free trial</button>
+      <p class="form-note">This opens your email app with the details filled in. Prefer WhatsApp? Message us on the number above.</p>
+      <div class="form-confirm" id="formConfirm" role="status">Opening your email app with the details filled in. If nothing happens, please WhatsApp us instead.</div>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top"><span class="pi" aria-hidden="true">π</span> Fun With Maths</a>
+        <p>Maths tuition for classes 6, 7 and 8. CBSE and ICSE. Online and in person.</p>
+      </div>
+      <ul class="foot-links">
+        <li><a href="#teach">What we teach</a></li>
+        <li><a href="#why">Why it's fun</a></li>
+        <li><a href="#quiz">60-second quiz</a></li>
+        <li><a href="#plans">Plans</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Book a free trial</a></li>
+      </ul>
+      <div class="joke-box">
+        <p class="kicker">Maths joke-o-meter</p>
+        <p class="joke" id="jokeText">Why was the maths book sad? It had too many problems.</p>
+        <button class="joke-btn" id="jokeBtn">Another one ↻</button>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Fun With Maths. All rights reserved.</span>
+      <span>Made with pi, patience and paper.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- Scroll ruler ---- */
+  var fill = document.getElementById("progressFill");
+  function onScroll(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    fill.style.width = pct.toFixed(2) + "%";
+  }
+  document.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  /* ---- Duplicate marquee content for a seamless loop ---- */
+  var track = document.getElementById("marqueeTrack");
+  track.innerHTML = track.innerHTML + track.innerHTML;
+
+  /* ---- Teaser answer ---- */
+  var teaserBtn = document.getElementById("teaserBtn");
+  teaserBtn.addEventListener("click", function(){
+    var box = document.getElementById("teaserAns");
+    var open = box.hasAttribute("hidden");
+    if(open){ box.removeAttribute("hidden"); } else { box.setAttribute("hidden",""); }
+    teaserBtn.textContent = open ? "Hide answer ▾" : "Show answer ▸";
+    teaserBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+
+  /* ---- Reveal on scroll ---- */
+  var reveals = document.querySelectorAll(".reveal");
+  if(reduceMotion || !("IntersectionObserver" in window)){
+    reveals.forEach(function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, {threshold:.12, rootMargin:"0px 0px -40px 0px"});
+    reveals.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---- Quiz ---- */
+  var QUESTIONS = [
+    { q:"What is ¾ of 60?",
+      opts:["30","45","48","52"], a:1,
+      why:"¼ of 60 is 15, so ¾ of 60 is 3 × 15 = 45." },
+    { q:"Two angles of a triangle are 55° and 65°. What is the third angle?",
+      opts:["50°","60°","70°","80°"], a:1,
+      why:"The angles of a triangle add up to 180°. 55 + 65 = 120, so the third angle is 60°." },
+    { q:"Simplify:  2³ × 2⁴  = ?",
+      opts:["2⁷","2¹²","4⁷","2"], a:0,
+      why:"Same base, so the powers add up: 3 + 4 = 7. The answer is 2⁷, not 2¹²." },
+    { q:"A rectangle is 12 cm long and 5 cm broad. What is its area?",
+      opts:["34 cm","60 cm","34 cm²","60 cm²"], a:3,
+      why:"Area = length × breadth = 12 × 5 = 60 — and area is always measured in square units, so 60 cm²." },
+    { q:"Which of these is a prime number?",
+      opts:["51","57","61","77"], a:2,
+      why:"51 = 3 × 17, 57 = 3 × 19 and 77 = 7 × 11 — all composite. 61 divides by nothing but 1 and itself." }
+  ];
+  var TOTAL_TIME = 60;
+
+  var elQ = document.getElementById("quizQ"),
+      elOpts = document.getElementById("quizOpts"),
+      elFb = document.getElementById("quizFeedback"),
+      elNext = document.getElementById("quizNext"),
+      elProg = document.getElementById("quizProgress"),
+      elTimer = document.getElementById("quizTimer"),
+      elPlay = document.getElementById("quizPlay"),
+      elResult = document.getElementById("quizResult"),
+      elScore = document.getElementById("resultScore"),
+      elMsg = document.getElementById("resultMsg"),
+      elKicker = document.getElementById("resultKicker");
+
+  var idx = 0, score = 0, locked = false, answered = 0;
+  var timeLeft = TOTAL_TIME, tick = null, started = false;
+
+  function fmt(s){ return Math.floor(s/60) + ":" + String(s%60).padStart(2,"0"); }
+
+  function startTimer(){
+    if(started) return;
+    started = true;
+    tick = setInterval(function(){
+      timeLeft--;
+      elTimer.textContent = fmt(Math.max(timeLeft,0));
+      if(timeLeft <= 10) elTimer.classList.add("low");
+      if(timeLeft <= 0){ clearInterval(tick); endGame(true); }
+    }, 1000);
+  }
+
+  function render(){
+    var q = QUESTIONS[idx];
+    elProg.textContent = "Question " + (idx+1) + " of " + QUESTIONS.length;
+    elQ.textContent = q.q;
+    elFb.innerHTML = "";
+    elNext.hidden = true;
+    locked = false;
+    elOpts.innerHTML = "";
+    q.opts.forEach(function(text, i){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = text;
+      b.addEventListener("click", function(){ choose(i, b); });
+      elOpts.appendChild(b);
+    });
+  }
+
+  function choose(i, btn){
+    if(locked) return;
+    locked = true;
+    startTimer();
+    answered++;
+    var q = QUESTIONS[idx];
+    var buttons = elOpts.querySelectorAll("button");
+    buttons.forEach(function(b, j){
+      b.disabled = true;
+      if(j === q.a) b.classList.add("correct");
+      else if(j === i) b.classList.add("wrong");
+      else b.classList.add("dim");
+    });
+    var right = i === q.a;
+    if(right) score++;
+    var verdict = right ? "Nailed it!" : "Close — here's the trick:";
+    elFb.innerHTML = '<span class="verdict' + (right ? "" : " miss") + '">' + verdict + "</span><span>" + q.why + "</span>";
+    if(idx < QUESTIONS.length - 1){
+      elNext.hidden = false;
+      elNext.focus();
+    } else {
+      var b = document.createElement("button");
+      b.className = "btn btn-chalk";
+      b.textContent = "See my score →";
+      b.addEventListener("click", function(){ endGame(false); });
+      elFb.appendChild(document.createElement("br"));
+      elFb.appendChild(b);
+    }
+  }
+
+  elNext.addEventListener("click", function(){ idx++; render(); elQ.focus && elQ.focus(); });
+
+  function endGame(timedOut){
+    clearInterval(tick);
+    if(timedOut && answered < QUESTIONS.length){
+      elKicker.textContent = "Time's up after " + answered + " question" + (answered === 1 ? "" : "s");
+    } else {
+      elKicker.textContent = "Final score";
+    }
+    elScore.textContent = score + " / " + QUESTIONS.length;
+    if(score === QUESTIONS.length){
+      elMsg.textContent = "Perfect score. That is exactly the kind of thinking we build on — imagine what a full term of this would do.";
+    } else if(score >= 3){
+      elMsg.textContent = "Solid work. A term of classes turns this into your child's strongest subject — and, going by how our own students talk about it, their favourite one too.";
+    } else {
+      elMsg.textContent = "Good start — these are precisely the gaps we fill in the first few classes. No shame in the score, only in leaving it there.";
+    }
+    if(timedOut && answered < QUESTIONS.length){
+      elMsg.textContent = "Sixty seconds is a short clock. In class we untick the timer and let your child think it through. " + elMsg.textContent;
+    }
+    elPlay.style.display = "none";
+    elResult.style.display = "block";
+  }
+
+  document.getElementById("quizRetry").addEventListener("click", function(){
+    idx = 0; score = 0; answered = 0; started = false;
+    timeLeft = TOTAL_TIME; clearInterval(tick);
+    elTimer.textContent = fmt(TOTAL_TIME);
+    elTimer.classList.remove("low");
+    elResult.style.display = "none";
+    elPlay.style.display = "block";
+    render();
+  });
+
+  render();
+
+  /* ---- Jokes ---- */
+  var JOKES = [
+    "Why was the maths book sad? It had too many problems.",
+    "Why did the student get zero on the test? The teacher asked him to show his working, and he wrote \"trust me\".",
+    "What do you call a dinosaur that knows a lot of maths? A calcu-raptor.",
+    "Why is six afraid of seven? Because seven eight (ate) nine.",
+    "Why did the maths teacher open a bakery? She was good at turning fractions into whole numbers."
+  ];
+  var jokeI = 0;
+  var jokeText = document.getElementById("jokeText");
+  document.getElementById("jokeBtn").addEventListener("click", function(){
+    jokeI = (jokeI + 1) % JOKES.length;
+    jokeText.textContent = JOKES[jokeI];
+  });
+
+  /* ---- Contact form → mailto ---- */
+  var form = document.getElementById("trialForm");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("fName");
+    var phone = document.getElementById("fPhone");
+    if(!name.value.trim()){ name.focus(); return; }
+    if(!phone.value.trim()){ phone.focus(); return; }
+    var email = document.getElementById("fEmail").value.trim();
+    var klass = document.getElementById("fClass").value;
+    var msg = document.getElementById("fMsg").value.trim();
+    var body =
+      "Parent's name: " + name.value.trim() + "\n" +
+      "Phone: " + phone.value.trim() + "\n" +
+      (email ? "Email: " + email + "\n" : "") +
+      "Class: " + klass + "\n" +
+      (msg ? "Notes: " + msg + "\n" : "") + "\n" +
+      "Sent from the Fun With Maths website — please call me about a free trial class.";
+    var mailto = "mailto:hello@funwithmaths.in"
+      + "?subject=" + encodeURIComponent("Free trial request — " + klass + " — " + name.value.trim())
+      + "&body=" + encodeURIComponent(body);
+    document.getElementById("formConfirm").style.display = "block";
+    window.location.href = mailto;
+  });
+})();
+</script>
+</body>
+</html>
