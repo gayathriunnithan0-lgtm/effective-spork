@@ -277,6 +277,9 @@ section{padding:clamp(3.6rem,8vw,6rem) 0;position:relative}
 .portrait .initial{font-family:var(--font-display);font-weight:700;font-size:clamp(5rem,10vw,7rem);color:var(--teal)}
 .tutor blockquote{margin:1.4rem 0 0;padding-left:1.2rem;border-left:4px solid var(--sun);font-size:1.12rem;color:var(--ink-soft)}
 .tutor .sig{font-family:var(--font-hand);font-size:2rem;color:var(--ink);margin-top:1rem;transform:rotate(-2deg);display:inline-block}
+.tutor .portrait-col{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.tutor .portrait{width:100%;max-width:340px;margin-inline:auto}
+.tutor .cred-strip{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.1rem 0 1.5rem}
 
 /* ============ FAQ ============ */
 .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem 1.6rem}
@@ -589,13 +592,23 @@ footer p{font-size:.95rem;color:rgba(255,253,246,.65)}
 <!-- ============ TUTOR ============ -->
 <section class="tutor" id="tutor">
   <div class="container tutor-grid">
-    <div class="portrait reveal" aria-hidden="true"><span class="initial">G</span></div>
+    <div class="portrait-col reveal">
+      <div class="portrait" aria-hidden="true"><span class="initial">R</span></div>
+      <span class="margin-note">17 years and still counting →</span>
+    </div>
     <div class="reveal" style="--d:.1s">
-      <h2>Meet your <span class="squiggle">tutor</span></h2>
-      <p style="color:var(--ink-soft)">Hi, I'm Gayathri. I hold a Master's in Medical Microbiology and an MBA in Finance and Business Analytics — both careers built on a foundation of maths, which is exactly why I care how it is taught.</p>
-      <p style="color:var(--ink-soft)">Over and over I have met bright students who were told they are "not maths people", when the truth is that they were taught to memorise instead of to understand. Fun With Maths exists to fix that, one class at a time.</p>
+      <h2>Meet <span class="squiggle">Rashmi R</span></h2>
+      <p style="color:var(--ink-soft)">Rashmi has been teaching for over seventeen years — longer than most of her students have been alive. She holds a BSc in Mathematics and a B.Ed, so teaching is her trained profession, not just a natural gift.</p>
+      <p style="color:var(--ink-soft)">An MBA in Investment Banking means she has used this maths outside the classroom too, and she is currently pursuing her MSc in Mathematics — because the best teachers never stop being students.</p>
+      <div class="cred-strip">
+        <span class="chip">BSc Mathematics</span>
+        <span class="chip">B.Ed</span>
+        <span class="chip">MBA — Investment Banking</span>
+        <span class="chip solid">MSc Mathematics · in progress</span>
+      </div>
+      <p style="color:var(--ink-soft)">Ask her why she still loves the classroom, and the answer has not changed in seventeen years: the students who struggle are rarely slow. They were taught to memorise instead of to understand.</p>
       <blockquote>Your child is not slow. The method was lazy.</blockquote>
-      <span class="sig">— Gayathri, Fun With Maths</span>
+      <span class="sig">— Rashmi R, Fun With Maths</span>
     </div>
   </div>
 </section>
